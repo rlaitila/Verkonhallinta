@@ -14,6 +14,19 @@ Työkalu suorittaa muutokset API- tai SSH-yhteyksien kautta mahdollistaen agenti
 Inventory sisältää tiedot kaikista Ansiblen hallitsemista kohteista. Inventory kertoo Ansiblelle mitä kohteita hallitaan, mihin ryhmään kohteet kuuluvat sekä miten niihin yhdistetään. Yksi kohde voi kuulua useampaan ryhmään. Ryhmillä voidaan mahdollistaa tehokas hallinta niin, että saadaan automatisoitua juuri tiettyä joukkoa tietyillä määrittelyillä. Tässä virtuaaliympäristössä ryhmät on jaettu seuraavanlaisesti:
 ![Inventory](images/week04-inventory.png)
 
+### Kerätyt järjestelmätiedot
+
+
+Järjestelmätiedot kerättiin Ansiblen setup-moduulilla.
+
+| Kone | Käyttöjärjestelmä | IP-osoite | Prosessorien määrä | Muistin määrä |
+|---|---|---|---:|---:|
+| attacker | Kali 2026.3 | 10.10.10.200 | 16 | 31695 MB |
+| db1 | Ubuntu 24.04 | 10.10.20.102 | 16 | 31695 MB |
+| web1 | Ubuntu 24.04 | 10.10.20.101 | 16 | 31695 MB |
+| client1 | Ubuntu 24.04 | 10.10.10.101 | 16 | 31695 MB |
+| branch-client | Ubuntu 24.04 | 10.10.30.101 | 16 | 31695 MB |
+
 ## 3. Esimerkkiplaybookit
 
 ### ping.yml
@@ -75,12 +88,20 @@ Tuloste muutetulla playbookilla:
 
 ## 5. Vertailu
 
+Käsin tehtäessä asennuksia kaikki komennot ja asetukset tehdään erikseen jokaiselle laitteelle. Yksittäiselle koneelle tämä on usein nopeaa ja yksinkertaista. Kuitenkin jos samoja muutoksia täytyy tehdä useille koneille, käsin tekeminen alkaa olemaan hyvin hidasta ja työlästä. Ansiblen playbookiin voidaan määritellä haluttu tavoitetila, jonka avulla samat asennukset voidaan suorittaa automaattisesti useille koneille. Playbookkia voidaan myös käytää myöhemmin uudelleen.
+
+Automaation etuna on erityisesti ajan säästyminen, toistettavuus ja virheiden vähentäminen. Samalla playbook toimii dokumentaationa siitä, mitä koneille on tehty. Toisaalta automaation rakentaminen vaatii aluksi enemmän työtä kuin yksittäisen muutoksen tekeminen käsin, ja myös ympäristöjen erot täytyy huomioida. Tässä tehtävässä esimerkiksi konttiympäristön puuttuva systemd aiheutti ongelman palvelun käynnistämisessä.
+
+Automaatio on erityisen tärkeää ympäristöissä, joissa hallittavia laitteita tai palvelimia on paljon tai samoja muutoksia tehdään toistuvasti. Tällöin asetusten tekeminen käsin jokaiselle laitteelle olisi hidasta ja kasvattaisi virheiden mahdollisuutta. Automaation avulla voidaan myös varmistaa, että eri laitteille tehdään muutokset samalla tavalla.
+
+
 ## 6. Yhteenveto
 
+Tässä tehtävässä opin paremmin, miten Ansible käytännössä toimii ja mihin sitä voidaan käyttää. Aluksi playbookien rakenne ja eri moduulit tuntuivat melko sekavilta, mutta tehtävien aikana niiden tarkoitus alkoi hahmottua paremmin. Opin myös käyttämään muuttujia ja keräämään järjestelmätietoja Ansiblella.
 
+Pientä ongelmaakin tuli playbookien tekemisessä vastaan, kun service-moduuli ei toiminutkaan tässä ympäristössä aivan normaalisti. Virheen selvittämisessä tulee kuitenkin aina myös opittua lisää, ja sitä kautta ymmärrys syveni. Lopulta playbook kuitenkin saatiin toimimaan. Ansible palybookeineen tuntuu vielä aika uudelta asialta, mutta tämän tehtävän jälkeen jo taas huomattavasti selkeämmältä. 
 
-
-
+Tekoälyä käytetty tehtävässä vianselvityksessä ja oppimisen tukena käsitteiden ja komentojen selittämiseen.
 
 
 
