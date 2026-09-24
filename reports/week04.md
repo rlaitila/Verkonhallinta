@@ -54,6 +54,25 @@ Playbook suoritus onnistui kaikille neljälle ubuntu_hosts-ryhmän koneelle. Nod
 
 ## 4. Oma playbook
 
+Tein install-webserver.yml-playbookin, joka asentaa Nginx-web-palvelimen web1-koneelle. Playbook päivittää pakettilistan, asentaa Nginxin ja luo /var/www/html/index.html-tiedoston, jossa näytetään palvelimen nimi inventory_hostname-muuttujan avulla.
+
+Palvelun käynnistämisessä ilmeni ongelma, koska konttiympäristössä systemd ei ollut käytössä. Ansiblen service-moduuli antoi virheen Service is in unknown state. Nginxin käynnistys muutettiin käyttämään service nginx -komentoa shell-moduulin kautta.
+
+Lopuksi web-palvelimen toiminta tarkistettiin Ansiblen uri-moduulilla. Playbook suoritettiin onnistuneesti ja kaikki neljä tehtävää valmistuivat ilman virheitä (failed=0).
+
+Ensimmäinen yritys service-moduulilla:
+![Nginx playbook1](images/week04-nginx-playbook1.png)
+
+Tuloste ensimmäisellä versiolla:
+![Nginx tuloste1](images/week04-tuloste1.png)
+
+Muutos tehty playbookiin käyttäen shell-moduulia:
+![Nginx playbook2](images/week04-nginx-playbook2.png)
+
+Tuloste muutetulla playbookilla:
+![Nginx tuloste2](images/week04-tuloste2.png)
+
+
 ## 5. Vertailu
 
 ## 6. Yhteenveto

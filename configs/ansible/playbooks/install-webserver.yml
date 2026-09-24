@@ -1,0 +1,31 @@
+- name : Install web server
+  hosts: web1
+  become: true
+
+  vars:
+    web_package: nginx
+
+  tasks:
+
+    - name: Install prerequisite packages
+      apt:
+        name: "{{ web_package }}"
+        state: present
+        update_cache: yes
+
+    - name: Create index.html
+      copy:
+        content: "Web server: {{ inventory_hostname }}"
+        dest: /var/www/html/index.html
+
+
+    - name: Ensure nginx is running
+      shell: service {{ web_package }} status|| service {{ web_package }} start
+      changed_when: false
+
+
+    - name: Verify web server responds
+      uri:
+        url: http://localhost
+        status_code: 200
+
